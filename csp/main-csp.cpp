@@ -13,6 +13,10 @@ typedef double value_type;
 #include "test-mkl.hpp"
 #endif
 
+#if defined (TEST_MAGMA)
+#include "test-magma.hpp"
+#endif
+
 #include "test-kokkos.hpp"
 
 #if defined (TEST_CHECK)
@@ -88,6 +92,26 @@ int main(int argc, char* argv[]) {
       /// - Matrices on host are interfaced to Magma
       /// - transpose input matrix 
       /// - transpose eigen vectors
+      TestCSP::TestMagma eig_magma(problem.getBatchsize(), problem.getBlocksize());
+      double t_magma(0);
+      for (int iter=niter_beg;iter<niter_end;++iter) {    
+        eig_magma.setProblem(problem.getProblemHost());
+        const double t = eig_magma.runTest();
+        t_magma += (iter >= 0)*t;
+      }
+#if defined (TEST_CHECK)
+      eig_magma.postUpdate();
+      TestCSP::TestCheck check(problem.getBatchsize(), 
+                               problem.getBlocksize(),
+                               problem.getProblemHost(),
+                               eig_magma._E,
+                               eig_magma._V,
+                               true);
+      const auto pass = check.checkTest(tol);
+      printf("Magma         Eigensolver left  test %s with a tol %e\n", (pass.first  ? "passed" : "fail"), tol);
+      printf("Magma         Eigensolver right test %s with a tol %e\n", (pass.second ? "passed" : "fail"), tol);
+#endif
+      printf("Magma         Eigensolver Time: %e seconds , %e seconds per problem\n", t_magma, (t_magma/double(niter_end*problem.getBatchsize())));
     }
 #endif
 

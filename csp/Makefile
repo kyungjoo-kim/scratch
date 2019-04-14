@@ -1,7 +1,10 @@
+MAGMA_CXXFLAGS = 
+MAGMA_LIB = 
+
 #blake
-KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/blake/release
-KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/blake/release
-EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
+#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/blake/release
+#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/blake/release
+#EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
 
 #bowman
 #KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/bowman/release
@@ -9,9 +12,13 @@ EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
 #EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
 
 #kokkos dev 2
-#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
-#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
-#EXTRA_CXXFLAGS = -DTEST_CHECK
+KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
+KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
+
+#MAGMA_CXXFLAGS = -I$(HOME)/Work/lib/magma/install/kokkos-dev-2/release/include -DADD_
+#MAGMA_LIB = -L$(HOME)/Work/lib/magma/install/kokkos-dev-2/release/lib -lmagma -llapack -lblas
+#EXTRA_CXXFLAGS = -DTEST_CHECK -DTEST_MAGMA $(MAGMA_CXXFLAGS)
+EXTRA_CXXFLAGS = -DTEST_CHECK 
 
 #white	
 #KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/white/release-p100
@@ -41,7 +48,7 @@ LINKFLAGS =
 
 DEPFLAGS = -M
 
-LIB = 
+LIB = $(MAGMA_LIB)
 
 
 this : $(TEST).o $(KOKKOS_LINK_DEPENDS) $(KOKKOSKERNELS_LINK_DEPENDS)  

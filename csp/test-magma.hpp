@@ -50,17 +50,23 @@ namespace TestCSP {
       return lwork_magma;
     }
 
-    struct CopyProblemTag {};
-    
-    inline
-    void operator()(const CopyProblemTag &, const int &i) const {
-      auto A_problem = Kokkos::subview(_A_problem, i, Kokkos::ALL(), Kokkos::ALL());
-      auto A = Kokkos::subview(_A, i, Kokkos::ALL(), Kokkos::ALL());
-
-      // transpose copy
-      for (int k0;k0<_Blk;++k0)
-        for (int k1;k1<_Blk;++k1)
-          A(k0,k1) = A_problem(k1,k0);
+    template<typename ArgViewType>
+    void setProblem(const ArgViewType &A_problem) {
+      // change the matrix into column major 
+      for (int i=0;i<_N;++i) {
+        auto B = Kokkos::subview(A_problem, i, Kokkos::ALL(), Kokkos::ALL());
+        auto A = Kokkos::subview(_A, i, Kokkos::ALL(), Kokkos::ALL());
+        
+        // transpose copy
+        for (int k0=0;k0<_Blk;++k0)
+          for (int k1=0;k1<_Blk;++k1)
+            A(k0,k1) = B(k1,k0);
+      }
+      
+      const value_type zero(0);
+      Kokkos::deep_copy(_E, zero);
+      Kokkos::deep_copy(_V, zero);
+      Kokkos::deep_copy(_W, zero);
     }
 
     inline
@@ -81,16 +87,6 @@ namespace TestCSP {
       }
     }
 
-    template<typename ArgViewType>
-    void setProblem(const ArgViewType &A) {
-      // change the matrix into column major 
-      Kokkos::parallel_for(Kokkos::RangePolicy<HpT,CopyProblemTag>(0, _N), *this);
-      
-      const value_type zero(0);
-      Kokkos::deep_copy(_E, zero);
-      Kokkos::deep_copy(_V, zero);
-      Kokkos::deep_copy(_W, zero);
-    }
     
     double runTest() {
       Kokkos::Impl::Timer timer;      
