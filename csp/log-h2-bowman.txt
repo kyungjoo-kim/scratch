@@ -1,0 +1,536 @@
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 500, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 500, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 1.850636e+26, diff 2.555250e-07
+ --- A*VR - VR*E    : ref norm 1.850636e+26, diff 5.128459e-06
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 3.037667e-03 seconds , 2.025111e-06 seconds per problem , 4.938000e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 1.850636e+26, diff 1.840279e-11
+ --- A*VR - VR*E    : ref norm 1.850636e+26, diff 1.982400e-09
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 1.863407e-03 seconds , 1.242271e-06 seconds per problem , 8.049771e+05 problems per second
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 1000, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 1000, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 3.707159e+26, diff 5.110503e-07
+ --- A*VR - VR*E    : ref norm 3.707159e+26, diff 1.025684e-05
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 5.937937e-03 seconds , 1.979312e-06 seconds per problem , 5.052260e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 3.707159e+26, diff 3.743156e-11
+ --- A*VR - VR*E    : ref norm 3.707159e+26, diff 3.961459e-09
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 3.672928e-03 seconds , 1.224309e-06 seconds per problem , 8.167870e+05 problems per second
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 2000, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 2000, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 7.622141e+26, diff 1.022094e-06
+ --- A*VR - VR*E    : ref norm 7.622141e+26, diff 2.051084e-05
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 1.146186e-02 seconds , 1.910310e-06 seconds per problem , 5.234751e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 7.622141e+26, diff 7.623035e-11
+ --- A*VR - VR*E    : ref norm 7.622141e+26, diff 6.179339e-09
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 7.100994e-03 seconds , 1.183499e-06 seconds per problem , 8.449521e+05 problems per second
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 4000, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 4000, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 1.639290e+27, diff 2.044203e-06
+ --- A*VR - VR*E    : ref norm 1.639290e+27, diff 4.102955e-05
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 2.094593e-02 seconds , 1.745494e-06 seconds per problem , 5.729037e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 1.639290e+27, diff 1.597773e-10
+ --- A*VR - VR*E    : ref norm 1.639290e+27, diff 1.405719e-08
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 1.308032e-02 seconds , 1.090026e-06 seconds per problem , 9.174090e+05 problems per second
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 8000, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 8000, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 3.487172e+27, diff 4.088431e-06
+ --- A*VR - VR*E    : ref norm 3.487172e+27, diff 8.206794e-05
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 4.153232e-02 seconds , 1.730513e-06 seconds per problem , 5.778632e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 3.487172e+27, diff 3.245489e-10
+ --- A*VR - VR*E    : ref norm 3.487172e+27, diff 2.987204e-08
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 2.589798e-02 seconds , 1.079082e-06 seconds per problem , 9.267132e+05 problems per second
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 10000, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 10000, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 4.417033e+27, diff 5.110543e-06
+ --- A*VR - VR*E    : ref norm 4.417033e+27, diff 1.025849e-04
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 5.066720e-02 seconds , 1.688907e-06 seconds per problem , 5.920990e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 4.417033e+27, diff 4.110415e-10
+ --- A*VR - VR*E    : ref norm 4.417033e+27, diff 3.783329e-08
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 3.198441e-02 seconds , 1.066147e-06 seconds per problem , 9.379570e+05 problems per second
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 20000, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 20000, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 8.840296e+27, diff 9.965593e-06
+ --- A*VR - VR*E    : ref norm 8.840296e+27, diff 2.000560e-04
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 1.011073e-01 seconds , 1.685121e-06 seconds per problem , 5.934292e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 8.840296e+27, diff 8.241459e-10
+ --- A*VR - VR*E    : ref norm 8.840296e+27, diff 7.573595e-08
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 6.317555e-02 seconds , 1.052926e-06 seconds per problem , 9.497345e+05 problems per second
+Compiler:
+  KOKKOS_COMPILER_INTEL: 1800
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: no
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: no
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_HPX: no
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: no
+  KOKKOS_ENABLE_GNU_ATOMICS: no
+  KOKKOS_ENABLE_INTEL_ATOMICS: yes
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: yes
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: yes
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: yes
+  KOKKOS_ENABLE_PRAGMA_VECTOR: yes
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+
+Runtime Configuration:
+Kokkos::OpenMP thread_pool_topology[ 1 x 272 x 1 ]
+
+# of Jacobian matrices = 518, nrows = 10, ncols = 10
+# of testing matrices = 40000, nrows = 10, ncols = 10
+ :::: Testing Eigenvalue solver (N = 40000, Blk = 10)
+MKL Test
+========
+ --- VL^H*A - E*VL^H: ref norm 1.790047e+28, diff 1.993075e-05
+ --- A*VR - VR*E    : ref norm 1.790047e+28, diff 4.001011e-04
+MKL           Eigensolver left  test passed with a tol 1.000000e-06
+MKL           Eigensolver right test passed with a tol 1.000000e-06
+MKL           Eigensolver Time: 1.982125e-01 seconds , 1.651771e-06 seconds per problem , 6.054109e+05 problems per second
+KokkosBatched Test
+==================
+ --- VL^H*A - E*VL^H: ref norm 1.790047e+28, diff 1.665773e-09
+ --- A*VR - VR*E    : ref norm 1.790047e+28, diff 1.532771e-07
+KokkosBatched Eigensolver left  test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver right test passed with a tol 1.000000e-06
+KokkosBatched Eigensolver Time: 1.215852e-01 seconds , 1.013210e-06 seconds per problem , 9.869621e+05 problems per second
