@@ -8,6 +8,7 @@ typedef Kokkos::DefaultHostExecutionSpace HpT;
 typedef double value_type;
 
 #include "test-matrix.hpp"
+
 #if defined (TEST_MKL)
 #include "test-mkl.hpp"
 #endif
@@ -38,6 +39,12 @@ int main(int argc, char* argv[]) {
     }
     const int niter_beg = -2, niter_end = 3;
     
+    ///
+    /// Create an array of matrices (random or from file)
+    /// - It stores the matrices in two formats
+    ///   - Host   : layour right
+    ///   - Kokkos : polymorphic layout according to execution space
+    ///
     TestCSP::TestMatrix problem;
     if (filename == NULL)
       problem.setRandomMatrix(N, Blk);
@@ -48,17 +55,20 @@ int main(int argc, char* argv[]) {
 
 #if defined (TEST_MKL)
     {
+      /// 
+      /// MKL can use layout right (row major format)
+      ///
       TestCSP::TestMKL eig_mkl(problem.getBatchsize(), problem.getBlocksize());
       double t_mkl(0);
       for (int iter=niter_beg;iter<niter_end;++iter) {    
-        eig_mkl.setProblem(problem.getProblemMKL());
+        eig_mkl.setProblem(problem.getProblemHost());
         const double t = eig_mkl.runTest();
         t_mkl += (iter >= 0)*t;
       }
 #if defined (TEST_CHECK)
       TestCSP::TestCheck check(problem.getBatchsize(), 
                                problem.getBlocksize(),
-                               problem.getProblemMKL(),
+                               problem.getProblemHost(),
                                eig_mkl._E,
                                eig_mkl._V,
                                true);
@@ -67,6 +77,17 @@ int main(int argc, char* argv[]) {
       printf("MKL           Eigensolver right test %s with a tol %e\n", (pass.second ? "passed" : "fail"), tol);
 #endif
       printf("MKL           Eigensolver Time: %e seconds , %e seconds per problem\n", t_mkl, (t_mkl/double(niter_end*problem.getBatchsize())));
+    }
+#endif
+
+#if defined (TEST_MAGMA)
+    {
+      ///
+      /// Magma uses column major format only 
+      /// - Magma uses an hybrid algorithm: Hessenberg reduction on a device and QR iterations are on host
+      /// - Matrices on host are interfaced to Magma
+      /// - transpose input matrix 
+      /// - transpose eigen vectors
     }
 #endif
 

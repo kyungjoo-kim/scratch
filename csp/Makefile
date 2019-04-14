@@ -2,13 +2,21 @@
 KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/blake/release
 KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/blake/release
 EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
+
 #bowman
 #KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/bowman/release
 #KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/bowman/release
+#EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
 
 #kokkos dev 2
 #KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
 #KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
+#EXTRA_CXXFLAGS = -DTEST_CHECK
+
+#white	
+#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/white/release-p100
+#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/white/release-p100
+#EXTRA_CXXFLAGS = -DTEST_CHECK -DTEST_MAGMA
 
 SRC = $(wildcard *.cpp)
 HDR = $(wildcard *.hpp)

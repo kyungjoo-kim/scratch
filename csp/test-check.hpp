@@ -1,6 +1,5 @@
 #ifndef __TEST_CHECK_HPP__
 #define __TEST_CHECK_HPP__
-#include "mkl.h"
 
 #include "Kokkos_Core.hpp"
 #include "impl/Kokkos_Timer.hpp"

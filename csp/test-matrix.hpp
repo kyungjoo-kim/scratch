@@ -7,37 +7,36 @@
 namespace TestCSP {
   struct TestMatrix {
     using A_value_type_3d_view_kokkos = Kokkos::View<value_type***, SpT>;  
-    using A_value_type_3d_view_mkl    = Kokkos::View<value_type***, Kokkos::LayoutRight,HpT>;  
+    using A_value_type_3d_view_host   = Kokkos::View<value_type***, Kokkos::LayoutRight,HpT>;  
     
     int _N, _Blk;
 
     A_value_type_3d_view_kokkos _A_kokkos;
-    A_value_type_3d_view_mkl _A_mkl;
+    A_value_type_3d_view_host _A_host;
 
     void setRandomMatrix(const int N, const int Blk) {
       _N = N;
       _Blk = Blk; 
 
       _A_kokkos = A_value_type_3d_view_kokkos("A_mat_kokkos", N, Blk, Blk);
-      _A_mkl    = A_value_type_3d_view_mkl   ("A_mat_mkl",    N, Blk, Blk);
+      _A_host    = A_value_type_3d_view_host ("A_mat_host",   N, Blk, Blk);
 
       const value_type one(1.0);
       Kokkos::Random_XorShift64_Pool<HpT> random(13245);      
-      Kokkos::fill_random(_A_mkl, random, one);
+      Kokkos::fill_random(_A_host, random, one);
 
       auto A_kokkos_host = Kokkos::create_mirror_view(Kokkos::HostSpace(), _A_kokkos);
       Kokkos::RangePolicy<HpT> policy(0, _N);
       Kokkos::parallel_for(policy, KOKKOS_LAMBDA(const int i) {
           for (int j=0,jend=A_kokkos_host.extent(1);j<jend;++j) 
             for (int k=0,kend=A_kokkos_host.extent(2);k<kend;++k)
-              A_kokkos_host(i,j,k) = _A_mkl(i,j,k);
+              A_kokkos_host(i,j,k) = _A_host(i,j,k);
         });
       Kokkos::deep_copy(_A_kokkos, A_kokkos_host);
     }
 
     void setMatrixFromFile(const char *name, const int N = -1, const int Blk = -1) {
-      A_value_type_3d_view_mkl A_tmp;
-      int n = 0, blk = 0;
+      A_value_type_3d_view_host A_tmp;
       {
         bool reading_matrix = false;
         int count = 0, nrows = 0, ncols = 0;
@@ -64,7 +63,7 @@ namespace TestCSP {
           }
         }
         printf("# of Jacobian matrices = %d, nrows = %d, ncols = %d\n", count, ncols, ncols);
-        A_tmp = A_value_type_3d_view_mkl("A_mat_tmp", count, ncols, ncols);
+        A_tmp = A_value_type_3d_view_host("A_mat_tmp", count, ncols, ncols);
 
         _N = N < 0 ? count : N;
         _Blk = ncols;        
@@ -73,7 +72,7 @@ namespace TestCSP {
 
       {
         bool reading_matrix = false;
-        int count = 0, nrows = 0, ncols = 0;
+        int count = 0, nrows = 0;
         std::ifstream infile(name);      
         if (!infile.is_open()) {
           printf("Error: opening file %s\n", name);
@@ -86,7 +85,6 @@ namespace TestCSP {
             content.push_back(buf);
           if (content.size() > 1) { // start of row matrix
             reading_matrix = true;          
-            ncols = content.size();
             for (int j=0,jend=content.size();j<jend;++j) 
               A_tmp(count, nrows, j) = std::stod(content.at(j));
             ++nrows;
@@ -112,22 +110,22 @@ namespace TestCSP {
 
       {
         _A_kokkos = A_value_type_3d_view_kokkos("A_mat_kokkos", _N, _Blk, _Blk);
-        _A_mkl    = A_value_type_3d_view_mkl   ("A_mat_mkl",    _N, _Blk, _Blk);
+        _A_host   = A_value_type_3d_view_host  ("A_mat_host",   _N, _Blk, _Blk);
 
         const int M = A_tmp.extent(0);
         for (int k=0;k<_N;++k) {
           const int kk = k%M; // tmp index
           for (int i=0;i<_Blk;++i)
             for (int j=0;j<_Blk;++j)
-              _A_mkl(k,i,j) = A_tmp(kk,i,j);
+              _A_host(k,i,j) = A_tmp(kk,i,j);
         }
 
 #if 0 // debugging print
-        for (int k=0,kend=_A_mkl.extent(0);k<kend;++k) {
+        for (int k=0,kend=_A_host.extent(0);k<kend;++k) {
           printf("k = %d\n", k);
-          for (int i=0,iend=_A_mkl.extent(1);i<iend;++i) {
-            for (int j=0,jend=_A_mkl.extent(2);j<jend;++j)
-              printf(" %e ", _A_mkl(k,i,j));
+          for (int i=0,iend=_A_host.extent(1);i<iend;++i) {
+            for (int j=0,jend=_A_host.extent(2);j<jend;++j)
+              printf(" %e ", _A_host(k,i,j));
             printf("\n");
           }
         }
@@ -138,7 +136,7 @@ namespace TestCSP {
         Kokkos::parallel_for(policy, KOKKOS_LAMBDA(const int i) {
             for (int j=0,jend=A_kokkos_host.extent(1);j<jend;++j) 
               for (int k=0,kend=A_kokkos_host.extent(2);k<kend;++k)
-                A_kokkos_host(i,j,k) = _A_mkl(i,j,k);
+                A_kokkos_host(i,j,k) = _A_host(i,j,k);
           });
         Kokkos::deep_copy(_A_kokkos, A_kokkos_host);
       }
@@ -148,7 +146,7 @@ namespace TestCSP {
     int getBlocksize() const { return _Blk; }
 
     A_value_type_3d_view_kokkos getProblemKokkos() const { return _A_kokkos; }
-    A_value_type_3d_view_mkl    getProblemMKL() const { return _A_mkl; }
+    A_value_type_3d_view_host   getProblemHost() const { return _A_host; }
   };
 }
 
