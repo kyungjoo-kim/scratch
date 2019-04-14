@@ -1,0 +1,10 @@
+#1: time, #2: rhs_temperature,
+#3: rhs_H2 
+#4: rhs_O2 
+#5: rhs_O 
+#6: rhs_OH 
+#7: rhs_H2O 
+#8: rhs_H 
+#9: rhs_HO2 
+#10: rhs_H2O2 
+#11: rhs_N2 
