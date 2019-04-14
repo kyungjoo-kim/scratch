@@ -69,6 +69,8 @@ int main(int argc, char* argv[]) {
         const double t = eig_mkl.runTest();
         t_mkl += (iter >= 0)*t;
       }
+      printf("MKL Test\n");
+      printf("========\n");
 #if defined (TEST_CHECK)
       TestCSP::TestCheck check(problem.getBatchsize(), 
                                problem.getBlocksize(),
@@ -80,7 +82,11 @@ int main(int argc, char* argv[]) {
       printf("MKL           Eigensolver left  test %s with a tol %e\n", (pass.first  ? "passed" : "fail"), tol);
       printf("MKL           Eigensolver right test %s with a tol %e\n", (pass.second ? "passed" : "fail"), tol);
 #endif
-      printf("MKL           Eigensolver Time: %e seconds , %e seconds per problem\n", t_mkl, (t_mkl/double(niter_end*problem.getBatchsize())));
+      const double t_mkl_per_problem = (t_mkl/double(niter_end*problem.getBatchsize()));
+      const double n_mkl_problems_per_second = 1.0/t_mkl_per_problem;
+      printf("MKL           Eigensolver Time: %e seconds , %e seconds per problem , %e problems per second\n", t_mkl, t_mkl_per_problem, n_mkl_problems_per_second);
+
+
     }
 #endif
 
@@ -99,6 +105,8 @@ int main(int argc, char* argv[]) {
         const double t = eig_magma.runTest();
         t_magma += (iter >= 0)*t;
       }
+      printf("Magma Test\n");
+      printf("==========\n");
 #if defined (TEST_CHECK)
       eig_magma.postUpdate();
       TestCSP::TestCheck check(problem.getBatchsize(), 
@@ -111,7 +119,9 @@ int main(int argc, char* argv[]) {
       printf("Magma         Eigensolver left  test %s with a tol %e\n", (pass.first  ? "passed" : "fail"), tol);
       printf("Magma         Eigensolver right test %s with a tol %e\n", (pass.second ? "passed" : "fail"), tol);
 #endif
-      printf("Magma         Eigensolver Time: %e seconds , %e seconds per problem\n", t_magma, (t_magma/double(niter_end*problem.getBatchsize())));
+      const double t_magma_per_problem = (t_magma/double(niter_end*problem.getBatchsize()));
+      const double n_magma_problems_per_second = 1.0/t_magma_per_problem;
+      printf("Magma         Eigensolver Time: %e seconds , %e seconds per problem , %e problems per second\n", t_magma, t_magma_per_problem, n_magma_problems_per_second);
     }
 #endif
 
@@ -123,6 +133,8 @@ int main(int argc, char* argv[]) {
         const double t = eig_kk.runTest();
         t_kk += (iter >= 0)*t;
       }
+      printf("KokkosBatched Test\n");
+      printf("==================\n");
 #if defined (TEST_CHECK)
       TestCSP::TestCheck check(problem.getBatchsize(), 
                                problem.getBlocksize(),
@@ -134,7 +146,9 @@ int main(int argc, char* argv[]) {
       printf("KokkosBatched Eigensolver left  test %s with a tol %e\n", (pass.first  ? "passed" : "fail"), tol);
       printf("KokkosBatched Eigensolver right test %s with a tol %e\n", (pass.second ? "passed" : "fail"), tol);
 #endif
-      printf("KokkosBatched Eigensolver Time: %e seconds , %e seconds per problem\n", t_kk, (t_kk/double(niter_end*problem.getBatchsize())));
+      const double t_kk_per_problem = (t_kk/double(niter_end*problem.getBatchsize()));
+      const double n_kk_problems_per_second = 1.0/t_kk_per_problem;
+      printf("KokkosBatched Eigensolver Time: %e seconds , %e seconds per problem , %e problems per second\n", t_kk, t_kk_per_problem, n_kk_problems_per_second);
     }
 
   }

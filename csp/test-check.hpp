@@ -68,8 +68,8 @@ namespace TestCSP {
           auto vr1 = Kokkos::subview(_Vc, i, 1, Kokkos::ALL(), l+1); 
           
           for (int k=0;k<_Blk;++k) {
-            const value_type vl_kl  = _vl_stores_col_vectors ? VL(k,l  ) : VL(l  ,k);
-            const value_type vl_klp = _vl_stores_col_vectors ? VL(k,l+1) : VL(l+1,k);
+            const value_type vl_kl  = _vl_stores_col_vectors ? VL(k,l  ) :  VL(l  ,k);
+            const value_type vl_klp = _vl_stores_col_vectors ? VL(k,l+1) : -VL(l+1,k);
             vl0(k) = std::complex<value_type>(vl_kl,  vl_klp);
             vl1(k) = std::complex<value_type>(vl_kl, -vl_klp);
             vr0(k) = std::complex<value_type>(VR(k,l),  VR(k,l+1));
@@ -109,10 +109,19 @@ namespace TestCSP {
         printf(" %e+%ei \n", std::real(val), std::imag(val));
       }
 
-      printf("Ac \n");
+      printf("VL \n");
       for (int k0=0;k0<_Blk;++k0) {
         for (int k1=0;k1<_Blk;++k1) {
           const auto val = VL(k0,k1);
+          printf(" %e+%ei ", std::real(val), std::imag(val));
+        }
+        printf("\n");
+      }
+      
+      printf("Ac \n");
+      for (int k0=0;k0<_Blk;++k0) {
+        for (int k1=0;k1<_Blk;++k1) {
+          const auto val = Ac(k0,k1);
           printf(" %e+%ei ", std::real(val), std::imag(val));
         }
         printf("\n");
