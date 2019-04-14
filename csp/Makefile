@@ -1,6 +1,14 @@
-#white
-KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
-KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
+#blake
+KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/blake/release
+KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/blake/release
+EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
+#bowman
+#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/bowman/release
+#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/bowman/release
+
+#kokkos dev 2
+#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
+#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
 
 SRC = $(wildcard *.cpp)
 HDR = $(wildcard *.hpp)
@@ -37,4 +45,4 @@ clean:
 # Compilation rules
 
 %.o:%.cpp 
-	$(CXX) $(KOKKOSKERNELS_CPPFLAGS) $(KOKKOS_CPPFLAGS) $(CPPFLAGS) $(KOKKOSKERNELS_CXXFLAGS) $(KOKKOS_CXXFLAGS) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(KOKKOSKERNELS_CPPFLAGS) $(KOKKOS_CPPFLAGS) $(CPPFLAGS) $(KOKKOSKERNELS_CXXFLAGS) $(KOKKOS_CXXFLAGS) $(CXXFLAGS) $(EXTRA_CXXFLAGS) -c $< -o $@

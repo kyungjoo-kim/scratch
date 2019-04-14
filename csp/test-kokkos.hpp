@@ -68,6 +68,7 @@ namespace TestCSP {
         _E("E_kk", N, 2, Blk),
         _V("V_kk", N, 2, Blk, Blk),
         _W("W_kk", N, getWorkSpaceSize()) {
+#if 0
       printf("TestKokkos (%d,%d)\n", _N, _Blk);
       printf("dim(A) = { %d, %d, %d }, stride(A) = { %d, %d, %d } \n",
              int(_A.extent(0)), int(_A.extent(1)), int(_A.extent(2)), 
@@ -81,6 +82,7 @@ namespace TestCSP {
       printf("dim(W) = { %d, %d }, stride(W) = { %d, %d } \n",
              int(_W.extent(0)), int(_W.extent(1)), 
              int(_W.stride(0)), int(_W.stride(1)));      
+#endif
     }
   };
 }

@@ -14,6 +14,10 @@ namespace TestCSP {
     using V_value_type_4d_view = Kokkos::View<value_type****,Kokkos::LayoutRight,HpT>;
     using W_value_type_2d_view = Kokkos::View<value_type**,  Kokkos::LayoutRight,HpT>;
 
+    using E_complex_value_type_2d_view = Kokkos::View<std::complex<value_type>**  ,Kokkos::LayoutRight,HpT>;
+    using V_complex_value_type_4d_view = Kokkos::View<std::complex<value_type>****,Kokkos::LayoutRight,HpT>;
+    using A_complex_value_type_3d_view = Kokkos::View<std::complex<value_type>*** ,Kokkos::LayoutRight,HpT>;
+
     int _N, _Blk;
     
     A_value_type_3d_view _A;
@@ -26,6 +30,7 @@ namespace TestCSP {
       {    
         double work_query;
         LAPACKE_dgeev_work(LAPACK_ROW_MAJOR, 
+                           //'N', 'V',
                            'V', 'V', 
                            _Blk, 
                            NULL, _Blk,
@@ -48,21 +53,27 @@ namespace TestCSP {
       Kokkos::deep_copy(_W, zero);
     }
 
+    struct RunTestTag   {};
+
+    inline
+    void operator()(const RunTestTag &, const int &i) const {
+      LAPACKE_dgeev_work(LAPACK_ROW_MAJOR, 
+                         //'N', 'V', 
+                         'V', 'V', 
+                         _Blk, 
+                         (value_type*)&_A(i,0,0), int(_A.stride(1)),
+                         &_E(i,0,0), &_E(i,1,0),
+                         &_V(i,0,0,0), int(_V.stride(2)),
+                         &_V(i,1,0,0), int(_V.stride(2)),
+                         &_W(i,0), int(_W.extent(1)));
+    }
+
     double runTest() {
       Kokkos::Impl::Timer timer;      
       timer.reset();
       {
-        Kokkos::RangePolicy<HpT> policy(0, _N);      
-        Kokkos::parallel_for(policy, KOKKOS_LAMBDA(const int i) {
-            LAPACKE_dgeev_work(LAPACK_ROW_MAJOR, 
-                               'V', 'V', 
-                               _Blk, 
-                               (double*)&_A(i,0,0), int(_A.stride(1)),
-                               &_E(i,0,0), &_E(i,1,0),
-                               &_V(i,0,0,0), int(_V.stride(2)),
-                               &_V(i,1,0,0), int(_V.stride(2)),
-                               &_W(i,0), int(_W.extent(1)));
-          });
+        Kokkos::RangePolicy<HpT,RunTestTag> policy(0, _N);      
+        Kokkos::parallel_for(policy, *this);
         Kokkos::fence();
       }
       const double t = timer.seconds();
@@ -76,6 +87,7 @@ namespace TestCSP {
         _E("E_mkl", N, 2, Blk),
         _V("V_mkl", N, 2, Blk, Blk),
         _W("W_mkl", N, getWorkSpaceSize()) {}
+
   };
 }
 
