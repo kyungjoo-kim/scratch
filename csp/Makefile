@@ -1,13 +1,21 @@
+
+HOST=$(shell hostname)
+
 #blake
+ifneq (,$(findstring blake,$(HOST)))
 KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/blake/release
 KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/blake/release
 EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
 LIB = 
+endif
 
 #bowman
-#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/bowman/release
-#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/bowman/release
-#EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
+ifneq (,$(findstring bowman,$(HOST)))
+KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/bowman/release
+KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/bowman/release
+EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
+LIB = 
+endif
 
 #kokkos dev 2
 #KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
@@ -29,9 +37,6 @@ HDR = $(wildcard *.hpp)
 include $(KOKKOS_INSTALL_PATH)/Makefile.kokkos
 include $(KOKKOSKERNELS_INSTALL_PATH)/Makefile.kokkos-kernels
 
-default: build
-	echo "Start Build"
-
 ifneq (,$(findstring Cuda,$(KOKKOS_DEVICES)))
 CXX = $(NVCC_WRAPPER) -g -lineinfo
 else
@@ -46,8 +51,8 @@ LINKFLAGS =
 
 DEPFLAGS = -M
 
-
-
+default:
+	echo "Start Build at $(HOST) $(TEST)"
 
 this : $(TEST).o $(KOKKOS_LINK_DEPENDS) $(KOKKOSKERNELS_LINK_DEPENDS)  
 	$(LINK) $(KOKKOS_LDFLAGS) $(KOKKOSKERNELS_LDFLAGS) $(LINKFLAGS) $(EXTRA_PATH) $(TEST).o $(KOKKOSKERNELS_LIB) $(KOKKOS_LIBS) $(LIB) -o $(TEST).exe
