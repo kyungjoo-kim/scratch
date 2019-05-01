@@ -1,4 +1,4 @@
-
+TEST_MAGMA ?= TRUE
 HOST=$(shell hostname)
 
 #blake
@@ -21,15 +21,26 @@ endif
 #KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
 #KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
 
-#MAGMA_CXXFLAGS = -I$(HOME)/Work/lib/magma/install/kokkos-dev-2/release/include -DADD_
-#LIB = -L$(HOME)/Work/lib/magma/install/kokkos-dev-2/release/lib -lmagma -llapack -lblas
-#EXTRA_CXXFLAGS = -DTEST_CHECK -DTEST_MAGMA $(MAGMA_CXXFLAGS)
-#EXTRA_CXXFLAGS = -DTEST_CHECK 
-
 #white	
-#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/white/release-p100
-#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/white/release-p100
-#EXTRA_CXXFLAGS = -DTEST_CHECK -DTEST_MAGMA
+ifneq (,$(findstring white,$(HOST)))
+MAGMA_INSTALL_PATH = $(HOME)/Work/lib/magma/install/white/release-2.4.0-p100
+MAGMA_CXXFLAGS = -I$(MAGMA_INSTALL_PATH)/include -DADD_
+KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/white/release-develop-p100
+KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/white/release-develop-p100
+
+ifeq ($(TEST_MAGMA),TRUE)
+# With Testing MAGMA
+EXTRA_CXXFLAGS = -DTEST_CHECK -DTEST_MAGMA $(MAGMA_CXXFLAGS) --expt-relaxed-constexpr
+LIB = -L$(MAGMA_INSTALL_PATH)/lib -lmagma -llapack -lblas -lcublas -lcusparse
+else
+# Without Testing MAGMA
+EXTRA_CXXFLAGS = -DTEST_CHECK --expt-relaxed-constexpr
+LIB = -llapack -lblas
+endif
+
+endif
+
+TEST ?= main-csp
 
 SRC = $(wildcard *.cpp)
 HDR = $(wildcard *.hpp)
@@ -54,7 +65,7 @@ DEPFLAGS = -M
 default:
 	echo "Start Build at $(HOST) $(TEST)"
 
-this : $(TEST).o $(KOKKOS_LINK_DEPENDS) $(KOKKOSKERNELS_LINK_DEPENDS)  
+this : clean $(TEST).o $(KOKKOS_LINK_DEPENDS) $(KOKKOSKERNELS_LINK_DEPENDS) 
 	$(LINK) $(KOKKOS_LDFLAGS) $(KOKKOSKERNELS_LDFLAGS) $(LINKFLAGS) $(EXTRA_PATH) $(TEST).o $(KOKKOSKERNELS_LIB) $(KOKKOS_LIBS) $(LIB) -o $(TEST).exe
 
 clean: 

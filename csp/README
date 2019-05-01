@@ -1,0 +1,28 @@
+
+0. Load modules (you can use mine from $HOME/bin/white.sh.
+
+. $HOME/bin/white.sh
+
+1. Kokkos and KokkosKernels are installed and provided from Kyungjoo's directory for Sandia testbeds.
+
+2. To build a test driver, 
+ - testing with MAGMA, you don't have to change anything in Makefile just type 
+   make this 
+
+ - MAGMA does not have a batched eigensolver and it takes long time in testing. if you would like to 
+   exclude MAGMA testing
+   make this TEST_MAGMA=FALSE
+  
+3. Test with jacobian matrices
+
+ - allocate a node 
+   white Pascal node: bsub -Is -q rhel7G bash
+ 
+ - testing random matrix test
+   ./main-csp.exe -N 1000 -B 10
+
+ - testing jacobian matrices from a file
+   ./main-csp.exe -F data/h2/jac.out
+
+ - testing jacobian matrices with a batchsize
+   ./main-csp.exe -F data/h2/jac.out -N 10000
