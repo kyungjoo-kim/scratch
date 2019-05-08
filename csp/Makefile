@@ -1,32 +1,33 @@
+KYUKIM_HOME=/ascldap/users/kyukim
 TEST_MAGMA ?= TRUE
 HOST=$(shell hostname)
 
 #blake
 ifneq (,$(findstring blake,$(HOST)))
-KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/blake/release
-KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/blake/release
+KOKKOS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkos/install/blake/release
+KOKKOSKERNELS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkoskernels/install/blake/release
 EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
 LIB = 
 endif
 
 #bowman
 ifneq (,$(findstring bowman,$(HOST)))
-KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/bowman/release
-KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/bowman/release
+KOKKOS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkos/install/bowman/release
+KOKKOSKERNELS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkoskernels/install/bowman/release
 EXTRA_CXXFLAGS = -DTEST_MKL -DTEST_CHECK
 LIB = 
 endif
 
 #kokkos dev 2
-#KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
-#KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
+#KOKKOS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
+#KOKKOSKERNELS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
 
 #white	
 ifneq (,$(findstring white,$(HOST)))
-MAGMA_INSTALL_PATH = $(HOME)/Work/lib/magma/install/white/release-2.4.0-p100
+MAGMA_INSTALL_PATH = $(KYUKIM_HOME)/Work/lib/magma/install/white/release-2.4.0-p100
 MAGMA_CXXFLAGS = -I$(MAGMA_INSTALL_PATH)/include -DADD_
-KOKKOS_INSTALL_PATH=$(HOME)/Work/lib/kokkos/install/white/release-develop-p100
-KOKKOSKERNELS_INSTALL_PATH=$(HOME)/Work/lib/kokkoskernels/install/white/release-develop-p100
+KOKKOS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkos/install/white/release-develop-p100
+KOKKOSKERNELS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkoskernels/install/white/release-develop-p100
 
 ifeq ($(TEST_MAGMA),TRUE)
 # With Testing MAGMA
