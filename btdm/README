@@ -5,6 +5,42 @@
 
 1. Kokkos and KokkosKernels are installed and provided from Kyungjoo's directory for Sandia testbeds.
 
+ - Kokkos config script
+../../../master/generate_makefile.bash \                                                                              
+    --kokkos-path=/ascldap/users/kyukim/Work/lib/kokkos/master \                                                      
+    --prefix=/ascldap/users/kyukim/Work/lib/kokkos/install/kokkos-dev-2/release \                                     
+    --compiler=/ascldap/users/kyukim/Work/lib/kokkos/master/bin/nvcc_wrapper \                                        
+    --cxxflags="-O3 -Werror -Wall -Wshadow -pedantic -Wsign-compare -Wtype-limits -Wuninitialized " \                 
+    --ldflags="-O3 " \                                                                                                
+    --with-cuda \                                                                                                     
+    --with-openmp \                                                                                                   
+    --with-serial \                                                                                                   
+    --arch=Power8,Volta70 \                                                                                           
+    --with-cuda-options=enable_lambda \                                                                               
+    --make-j=16 
+
+make -j install
+
+ - Kokkos kernels config script
+export KOKKOS_PATH=/ascldap/users/kyukim/Work/lib/kokkos/master                                                       
+../../../master/scripts/generate_makefile.bash \                                                                      
+    --kokkoskernels-path=/ascldap/users/kyukim/Work/lib/kokkoskernels/kyukim \                                        
+    --prefix=/ascldap/users/kyukim/Work/lib/kokkoskernels/install/kokkos-dev-2/release \                              
+    --compiler=/ascldap/users/kyukim/Work/lib/kokkos/master/bin/nvcc_wrapper \                                        
+    --with-scalars='double' \                                                                                         
+    --with-openmp \                                                                                                   
+    --with-cuda \                                                                                                     
+    --with-options=eti-only \                                                                                         
+    --with-ordinals=int \                                                                                             
+    --with-offsets=int \                                                                                              
+    --with-tpls='cublas,blas' \                                                                                       
+    --with-cuda-options="enable_lambda" \                                                                             
+    --arch=SNB,Volta70     
+
+make -j install-lib
+
+ - modify Makefile according to the install directories given by the above.
+
 2. To build a test driver, 
    make this 
 
@@ -15,3 +51,6 @@
  - 4 GB use case (application use case; to gain a reasonable amount of time steps per second, the application
    uses the rougly 4 GB problem size)
    ./KokkosBatched_Test_BlockTridiagDirect.exe -N 4096 -L 100 -B  7
+
+4. Profiling
+ - run-profile.sh
