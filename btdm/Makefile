@@ -19,8 +19,10 @@ LIB =
 endif
 
 #kokkos dev 2
-#KOKKOS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
-#KOKKOSKERNELS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
+ifneq (,$(findstring kokkos-dev-2,$(HOST)))
+KOKKOS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkos/install/kokkos-dev-2/release
+KOKKOSKERNELS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkoskernels/install/kokkos-dev-2/release
+endif
 
 #white	
 ifneq (,$(findstring white,$(HOST)))
