@@ -1,0 +1,17 @@
+
+0. Load modules (you can use mine from $HOME/bin/white.sh.
+
+. $HOME/bin/white.sh
+
+1. Kokkos and KokkosKernels are installed and provided from Kyungjoo's directory for Sandia testbeds.
+
+2. To build a test driver, 
+   make this 
+
+3. Test 
+ - 16 GB use case 
+   ./KokkosBatched_Test_BlockTridiagDirect.exe -N 16384 -L 128 -B 7 
+
+ - 4 GB use case (application use case; to gain a reasonable amount of time steps per second, the application
+   uses the rougly 4 GB problem size)
+   ./KokkosBatched_Test_BlockTridiagDirect.exe -N 4096 -L 100 -B  7
