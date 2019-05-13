@@ -1,3 +1,128 @@
+==136566== NVPROF is profiling process 136566, command: ./KokkosBatched_Test_BlockTridiagDirect.exe -N 16384 -L 128 -B 7
+==136566== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
+Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
+  In general, for best performance with OpenMP 4.0 or better set OMP_PROC_BIND=spread and OMP_PLACES=threads
+  For best performance with OpenMP 3.1 set OMP_PROC_BIND=true
+  For unit testing set OMP_PROC_BIND=false
+Compiler:
+  KOKKOS_COMPILER_GNU: 610
+  KOKKOS_COMPILER_NVCC: 1
+Architecture:
+  KOKKOS_ENABLE_ISA_KNC: no
+  KOKKOS_ENABLE_ISA_POWERPCLE: yes
+  KOKKOS_ENABLE_ISA_X86_64: no
+Devices:
+  KOKKOS_ENABLE_CUDA: yes
+  KOKKOS_ENABLE_OPENMP: yes
+  KOKKOS_ENABLE_THREADS: no
+  KOKKOS_ENABLE_QTHREADS: no
+  KOKKOS_ENABLE_SERIAL: yes
+Default Device:
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_CUDA: yes
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_OPENMP: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_THREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_QTHREADS: no
+  KOKKOS_ENABLE_DEFAULT_DEVICE_TYPE_SERIAL: no
+Atomics:
+  KOKKOS_ENABLE_CUDA_ATOMICS: yes
+  KOKKOS_ENABLE_GNU_ATOMICS: yes
+  KOKKOS_ENABLE_INTEL_ATOMICS: no
+  KOKKOS_ENABLE_OPENMP_ATOMICS: no
+  KOKKOS_ENABLE_WINDOWS_ATOMICS: no
+  KOKKOS_ENABLE_SERIAL_ATOMICS: no
+Vectorization:
+  KOKKOS_ENABLE_PRAGMA_IVDEP: no
+  KOKKOS_ENABLE_PRAGMA_LOOPCOUNT: no
+  KOKKOS_ENABLE_PRAGMA_SIMD: no
+  KOKKOS_ENABLE_PRAGMA_UNROLL: no
+  KOKKOS_ENABLE_PRAGMA_VECTOR: no
+Memory:
+  KOKKOS_ENABLE_HBWSPACE: no
+  KOKKOS_ENABLE_INTEL_MM_ALLOC: no
+  KOKKOS_ENABLE_POSIX_MEMALIGN: no
+Options:
+  KOKKOS_ENABLE_ASM: yes
+  KOKKOS_ENABLE_CXX14: no
+  KOKKOS_ENABLE_CXX17: no
+  KOKKOS_ENABLE_CXX20: no
+  KOKKOS_ENABLE_DEBUG_BOUNDS_CHECK: no
+  KOKKOS_ENABLE_HWLOC: no
+  KOKKOS_ENABLE_LIBRT: no
+  KOKKOS_ENABLE_MPI: no
+  KOKKOS_ENABLE_PROFILING: yes
+Cuda Options:
+  KOKKOS_ENABLE_CUDA_LAMBDA: yes
+  KOKKOS_ENABLE_CUDA_LDG_INTRINSIC: no
+  KOKKOS_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE: no
+  KOKKOS_ENABLE_CUDA_UVM: no
+  KOKKOS_ENABLE_CUSPARSE: no
+  KOKKOS_ENABLE_CXX11_DISPATCH_LAMBDA: yes
+
+Runtime Configuration:
+macro  KOKKOS_ENABLE_CUDA      : defined
+macro  CUDA_VERSION          = 10010 = version 10.1
+Kokkos::Cuda[ 0 ] Tesla V100-PCIE-16GB capability 7.0, Total Global Memory: 15.75 G, Shared Memory per Block: 48 K : Selected
+Kokkos::Cuda[ 1 ] Tesla V100-PCIE-16GB capability 7.0, Total Global Memory: 15.75 G, Shared Memory per Block: 48 K
+Kokkos::OpenMP thread_pool_topology[ 1 x 4 x 1 ]
+
+==136566== Profiling application: ./KokkosBatched_Test_BlockTridiagDirect.exe -N 16384 -L 128 -B 7
+ :::: Testing (N = 16384, L = 128, Blk = 7, vl = 16, vi = 2, niter = 1)
+factorize time = 0.349266 , # of factorization per min = 171.788882 
+solve time = 0.223351 , # of solves per min = 268.635340
+rel error = 2.235876e-19
+==136566== Profiling result:
+==136566== Metric result:
+Invocations                               Metric Name                                          Metric Description         Min         Max         Avg
+Device "Tesla V100-PCIE-16GB (0)"
+    Kernel: _ZN6Kokkos4Impl33cuda_parallel_launch_local_memoryINS0_11ParallelForIZ4mainEUlRKNS0_14CudaTeamMemberEE1_NS_10TeamPolicyIJNS_4CudaEEEES8_EEEEvT_
+          1                   dram_write_transactions                            Device Memory Write Transactions    20617177    20617177    20617177
+          1                      dram_read_throughput                               Device Memory Read Throughput  465.42GB/s  465.42GB/s  465.42GB/s
+          1                     dram_write_throughput                              Device Memory Write Throughput  107.22GB/s  107.22GB/s  107.22GB/s
+          1                     global_store_requests   Total number of global store requests from Multiprocessor     3796992     3796992     3796992
+          1                            gst_efficiency                              Global Memory Store Efficiency     100.00%     100.00%     100.00%
+          1                  gst_requested_throughput                           Requested Global Store Throughput  190.56GB/s  190.56GB/s  190.56GB/s
+          1                            gst_throughput                                     Global Store Throughput  190.56GB/s  190.56GB/s  190.56GB/s
+          1                          gst_transactions                                   Global Store Transactions    36642816    36642816    36642816
+          1              gst_transactions_per_request                       Global Store Transactions Per Request    9.650485    9.650485    9.650485
+          1                            gld_efficiency                               Global Memory Load Efficiency      27.86%      27.86%      27.86%
+          1                  gld_requested_throughput                            Requested Global Load Throughput  190.56GB/s  190.56GB/s  190.56GB/s
+          1                            gld_throughput                                      Global Load Throughput  684.09GB/s  684.09GB/s  684.09GB/s
+          1                          gld_transactions                                    Global Load Transactions   131547136   131547136   131547136
+          1              gld_transactions_per_request                        Global Load Transactions Per Request    8.762892    8.762892    8.762892
+          1                            l2_utilization                                        L2 Cache Utilization     Low (2)     Low (2)     Low (2)
+          1                       l2_write_throughput                                      L2 Throughput (Writes)  190.56GB/s  190.56GB/s  190.56GB/s
+          1                     l2_write_transactions                                       L2 Write Transactions    36642995    36642995    36642995
+          1                        l2_read_throughput                                       L2 Throughput (Reads)  549.34GB/s  549.34GB/s  549.34GB/s
+          1                      l2_read_transactions                                        L2 Read Transactions   105634356   105634356   105634356
+          1                     local_load_throughput                                Local Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                             sm_efficiency                                     Multiprocessor Activity      98.86%      98.86%      98.86%
+          1                 warp_execution_efficiency                                   Warp Execution Efficiency      89.15%      89.15%      89.15%
+          1                        achieved_occupancy                                          Achieved Occupancy    0.199584    0.199584    0.199584
+    Kernel: _ZN6Kokkos4Impl33cuda_parallel_launch_local_memoryINS0_11ParallelForIZ4mainEUlRKNS0_14CudaTeamMemberEE0_NS_10TeamPolicyIJNS_4CudaEEEES8_EEEEvT_
+          1                   dram_write_transactions                            Device Memory Write Transactions   164186095   164186095   164186095
+          1                      dram_read_throughput                               Device Memory Read Throughput  355.97GB/s  355.97GB/s  355.97GB/s
+          1                     dram_write_throughput                              Device Memory Write Throughput  208.86GB/s  208.86GB/s  208.86GB/s
+          1                     global_store_requests   Total number of global store requests from Multiprocessor    17980416    17980416    17980416
+          1                            gst_efficiency                              Global Memory Store Efficiency     100.00%     100.00%     100.00%
+          1                  gst_requested_throughput                           Requested Global Store Throughput  334.10GB/s  334.10GB/s  334.10GB/s
+          1                            gst_throughput                                     Global Store Throughput  334.10GB/s  334.10GB/s  334.10GB/s
+          1                          gst_transactions                                   Global Store Transactions   262635520   262635520   262635520
+          1              gst_transactions_per_request                       Global Store Transactions Per Request   14.606754   14.606754   14.606754
+          1                            gld_efficiency                               Global Memory Load Efficiency      33.51%      33.51%      33.51%
+          1                  gld_requested_throughput                            Requested Global Load Throughput  334.10GB/s  334.10GB/s  334.10GB/s
+          1                            gld_throughput                                      Global Load Throughput  997.16GB/s  997.16GB/s  997.16GB/s
+          1                          gld_transactions                                    Global Load Transactions   783867904   783867904   783867904
+          1              gld_transactions_per_request                        Global Load Transactions Per Request   11.168276   11.168276   11.168276
+          1                            l2_utilization                                        L2 Cache Utilization     Low (3)     Low (3)     Low (3)
+          1                       l2_write_throughput                                      L2 Throughput (Writes)  334.10GB/s  334.10GB/s  334.10GB/s
+          1                     l2_write_transactions                                       L2 Write Transactions   262635802   262635802   262635802
+          1                        l2_read_throughput                                       L2 Throughput (Reads)  820.47GB/s  820.47GB/s  820.47GB/s
+          1                      l2_read_transactions                                        L2 Read Transactions   644967860   644967860   644967860
+          1                     local_load_throughput                                Local Memory Load Throughput  0.00000B/s  0.00000B/s  0.00000B/s
+          1                             sm_efficiency                                     Multiprocessor Activity      98.06%      98.06%      98.06%
+          1                 warp_execution_efficiency                                   Warp Execution Efficiency      92.72%      92.72%      92.72%
+          1                        achieved_occupancy                                          Achieved Occupancy    0.199081    0.199081    0.199081
+
 ==279030== NVPROF is profiling process 279030, command: ./KokkosBatched_Test_BlockTridiagDirect.exe -N 16384 -L 128 -B 7
 ==279030== Some kernel(s) will be replayed on device 0 in order to collect all events/metrics.
 Kokkos::OpenMP::initialize WARNING: OMP_PROC_BIND environment variable not set
