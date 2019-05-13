@@ -1,5 +1,4 @@
 KYUKIM_HOME=/ascldap/users/kyukim
-TEST_MAGMA ?= TRUE
 HOST=$(shell hostname)
 
 #blake
@@ -29,9 +28,8 @@ ifneq (,$(findstring white,$(HOST)))
 KOKKOS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkos/install/white/release-develop-p100
 KOKKOSKERNELS_INSTALL_PATH=$(KYUKIM_HOME)/Work/lib/kokkoskernels/install/white/release-develop-p100
 
-EXTRA_CXXFLAGS = -DTEST_CHECK --expt-relaxed-constexpr
+EXTRA_CXXFLAGS = --expt-relaxed-constexpr
 LIB = 
-
 endif
 
 TEST ?= KokkosBatched_Test_BlockTridiagDirect
